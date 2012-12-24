@@ -1,0 +1,157 @@
+" ------------------------------------------------------------------------------
+" Exit when your app has already been loaded (or "compatible" mode set)
+
+if !has('python')
+    echo "Error: Required vim compiled with +python"
+    finish
+endif
+
+if !exists('s:VLW_mupdf_pid')
+  let s:VLW_mupdf_pid = '0'
+endif
+
+
+if !exists('g:VLW_mupdf_exepath')
+  let g:VLW_mupdf_exepath = 'mupdf.exe'
+endif
+
+if !exists('g:VLW_temp_dir')
+  let g:VLW_temp_dir = './vlw_temp'
+endif
+
+if !exists('g:VLW_CompileRule_pdflatex')
+  let g:VLW_CompileRule_pdflatex = 'pdflatex -interaction=nonstopmode'
+endif
+
+if !exists('g:VLW_CompileRule_xelatex')
+  let g:VLW_CompileRule_xelatex = 'xelatex -interaction=nonstopmode'
+endif
+
+let s:VLW_mupdf_curpdf = ''
+
+function! VLW_Mapkey()
+nnoremap <buffer> <F6> :call VLW_FolderPreview()<CR>
+nnoremap <buffer> <C-F8> :call VLW_RreshPreview('$env')<CR>
+nnoremap <buffer> <C-S-F8> :call VLW_MathPreview()<CR>
+noremap <buffer> <C-P>  <ESC>:call VLW_RreshPreview('$env')<CR>i
+endfunction
+
+" initialization
+if exists("g:loaded_VLW_Windows") || &cp
+  call VLW_Mapkey()
+  finish
+endif
+let g:loaded_VLW_Windows= 100 " your version number
+let s:keepcpo           = &cpo
+set cpo&vim
+
+let s:plugin_dir		= expand('<sfile>:p:h')
+python << EOF
+import sys, time
+sys.path.append(vim.eval('s:plugin_dir'))
+import vim_latex
+import ctypes
+import vim
+EOF
+
+call VLW_Mapkey()
+
+function! VLW_KillMupdf()
+  exec 'silent !start /min taskkill /pid '.s:VLW_mupdf_pid
+endfunction
+
+function! VLW_ResetLayout()
+python << EOF
+user32 = ctypes.windll.user32
+screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+w = screensize[0]/2
+h = screensize[1] - 50
+spid = vim.eval('s:VLW_mupdf_pid')
+(mypid, mytitle) = vim_latex.pyvlw_native.getMyPID()
+if spid != '0':
+  vim_latex.pyvlw_native.setMupdfWindow(spid, w,0,w,h)
+  vim_latex.pyvlw_native.setMupdfWindow(mypid,0,0,w,h)
+EOF
+endfunction
+
+function! VLW_RefreshView(pdfname)
+  if !filereadable(a:pdfname)
+    echo 'Can not read "'.a:pdfname.'"'
+    return
+  endif
+  if a:pdfname != s:VLW_mupdf_curpdf
+    let s:VLW_mupdf_curpdf = a:pdfname
+    call VLW_KillMupdf()
+    let s:VLW_mupdf_pid = '0'
+  endif
+python << EOF
+spid = vim.eval('s:VLW_mupdf_pid')
+ep   = vim.eval('g:VLW_mupdf_exepath')
+fn   = vim.eval('s:VLW_mupdf_curpdf')
+(spid,title) = vim_latex.refreshMupdf(ep,fn,spid)
+vim.command('let s:VLW_mupdf_pid = "'+spid+'"')
+if spid=='0':
+  print 'Fail to run', ep
+else:
+  #vim_latex.pyvlw_native.setMupdfWindow(spid,0,0,100,100)
+  time.sleep(0.05) # 50ms
+  vim_latex.pyvlw_native.sendKeystroke(spid, ord('R'))
+  time.sleep(0.1) # 100ms, just make sure 
+  vim_latex.pyvlw_native.sendKeystroke(spid, ord('R'))
+  vim.command('call VLW_ResetLayout()')
+EOF
+  "echo s:VLW_mupdf_pid
+endfunction
+
+function! VLW_Info()
+python << EOF
+vim_latex.printInfo()
+EOF
+endfunction
+
+function! VLW_CompilePreview(envtype)
+python << EOF
+vim_latex.extractCurrentEnv(vim.eval('a:envtype'))
+vim_latex.compileTempTex()
+EOF
+endfunction
+
+function! VLW_RreshPreview(envtype)
+  call VLW_CompilePreview(a:envtype)
+  call VLW_RefreshView(g:VLW_temp_dir.'/preview.pdf')  
+endfunction
+
+function! VLW_MathPreview()
+  let cchar = getline('.')[col('.')-1]
+  if cchar == '\'
+    let envtype = '%\'.getline('.')[col('.')]
+  else
+    let envtype = '%'.cchar
+  endif
+  call VLW_RreshPreview(envtype)
+endfunction
+
+function! VLW_FolderPreview()
+  let fcb =  foldclosed(line('.'))
+  if fcb>=0
+    let fce = foldclosedend(line('.'))
+    call VLW_RreshPreview('#'.fcb.':'.fce)
+  else
+    echo 'Close the folder first.'
+  endif
+endfunction
+
+
+
+if !exists('vlw_automap_loaded')
+  let vlw_automap_loaded = 1
+" key maps
+" autocmd InsertEnter *.tex silent call VLW_RreshPreviewBG('env')
+" autocmd VimLeave *.tex silent call killMupdf()
+au VimLeave * silent call VLW_KillMupdf() 
+endif
+
+" ------------------------------------------------------------------------------
+let &cpo= s:keepcpo
+unlet s:keepcpo
+

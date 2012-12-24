@@ -1,0 +1,30 @@
+﻿<+	+>	!comp!	!exe!
+%        File: !comp!expand("%:p:t")!comp!
+%     Created: !comp!strftime("%a %b %d %I:00 %p %Y ").substitute(strftime('%Z'), '\<\(\w\)\(\w*\)\>\(\W\|$\)', '\1', 'g')!comp!
+% Last Change: !comp!strftime("%a %b %d %I:00 %p %Y ").substitute(strftime('%Z'), '\<\(\w\)\(\w*\)\>\(\W\|$\)', '\1', 'g')!comp!
+%
+\documentclass[a4paper]{article}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\usepackage[cm-default]{fontspec}
+\usepackage{xunicode,xltxtra}
+\usepackage{indentfirst}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\setsansfont[Mapping=tex-text]{SimHei} 
+\setmainfont[BoldFont=SimHei]{SimSun}
+ 
+\begin{document}
+\title{Xetex测试}
+\author{陈宇恒}
+\maketitle
+
+\section{第一章}
+<++>
+\end{document}
