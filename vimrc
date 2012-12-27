@@ -24,6 +24,8 @@ set nocp
 filetype plugin on
 
 
+set isfname-==
+
 " set tags+=$VIMRUNTIME/../vimfiles/tags/sdltags
 " set tags+=$VIMRUNTIME/../vimfiles/tags/boosttags
 set tags+=$VIMRUNTIME/../vimfiles/tags/stltags
