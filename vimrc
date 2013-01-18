@@ -1,7 +1,11 @@
 set nocompatible
 " source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
+" source $VIMRUNTIME/mswin.vim
+" behave mswin
+source $VIMRUNTIME/ftplugin/man.vim
+source ~/.vim/cscope_maps.vim
+source ~/.vim/cscopePath.vim
+
 
 " Chenyh's setting
 " for Linux
@@ -90,4 +94,5 @@ let g:Tex_DefaultTargetFormat='pdf'
 " let g:fencview_autodetect = 1
 
 nnoremap <C-P> :tabp<CR>
+nmap M :Man <cword><CR>
 
