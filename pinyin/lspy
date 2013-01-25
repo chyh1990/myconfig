@@ -1,0 +1,25 @@
+#!/bin/bash
+if [[ -n "$1" ]]; then
+  FILE=$1
+else
+  FILE="*"
+fi
+IFS="
+"
+files=( $(ls -1) )
+(
+for f in "${files[@]}"
+do
+  echo "${f}"
+done 
+) | chinese2pinyin | (
+  cnt=0
+  while read -r line
+  do
+    [[ "$line" == $FILE ]] && {
+      echo ${files[$cnt]}
+    }
+    let cnt+=1
+  done
+)
+
