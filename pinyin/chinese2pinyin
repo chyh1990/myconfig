@@ -10,15 +10,20 @@ p = Pinyin()
 #srccodec = sys.stdin.encoding or sys.getdefaultencoding()
 srccodec = 'utf-8'
 full = False
-
-if len(sys.argv)>1 and sys.argv[1]=='-f':
-  full = True
+origin = False
+for x in sys.argv[1:]:
+  if x=='-f':
+    full = True
+  elif x=='-o':
+    origin = True
 
 while True:
   line = sys.stdin.readline()
   if not line: break
   line = line.strip()
   src = unicode(line, srccodec)
+  if origin:
+    print src
   if full:
     print p.get_pinyin(src)
   else:

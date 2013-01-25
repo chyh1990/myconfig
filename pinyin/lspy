@@ -1,4 +1,21 @@
 #!/bin/bash
+
+while getopts "f" opt; do
+case $opt in
+  f)
+  FULL="-f"
+  ;;
+  -)
+  break;;
+  \?)
+  echo 'usage: lspy [-f] [pinyin]' >&2
+  exit 1
+  ;;
+esac
+done
+
+shift $(($OPTIND - 1))
+
 if [[ -n "$1" ]]; then
   FILE=$1
 else
@@ -6,20 +23,13 @@ else
 fi
 IFS="
 "
-files=( $(ls -1) )
-(
-for f in "${files[@]}"
-do
-  echo "${f}"
-done 
-) | chinese2pinyin | (
-  cnt=0
+ls -1 | chinese2pinyin -o $FULL | (
   while read -r line
   do
-    [[ "$line" == $FILE ]] && {
-      echo ${files[$cnt]}
+    read -r pinyin
+    [[ "$pinyin" == $FILE ]] && {
+      echo $line
     }
-    let cnt+=1
   done
 )
 
