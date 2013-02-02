@@ -1,0 +1,9 @@
+alias pss='ps aux|grep -v grep|grep '
+alias cscopeR="cscope -Rbkq"
+
+function use_gnubin
+{
+  export PATH=/Users/chenyh/prog/gnubin:$PATH
+}
+
+tmux list-session 2>/dev/null
