@@ -2,12 +2,12 @@
 
 while getopts "f" opt; do
 case $opt in
-  f)
+f)
   FULL="-f"
   ;;
-  -)
+-)
   break;;
-  \?)
+\?)
   echo 'usage: lspy [-f] [pinyin]' >&2
   exit 1
   ;;
@@ -16,20 +16,14 @@ done
 
 shift $(($OPTIND - 1))
 
-if [[ -n "$1" ]]; then
-  FILE=$1
-else
-  FILE="*"
-fi
+[[ -n "$1" ]] && FILE=$1 || FILE="*"
+
 IFS="
 "
 ls -1 | chinese2pinyin -o $FULL | (
-  while read -r line
-  do
+  while read -r line; do
     read -r pinyin
-    [[ "$pinyin" == $FILE ]] && {
-      echo $line
-    }
+    [[ "$pinyin" == $FILE ]] && echo $line
   done
 )
 

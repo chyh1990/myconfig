@@ -1,3 +1,9 @@
+if !empty($GOROOT)
+  set rtp+=$GOROOT/misc/vim
+elseif isdirectory('/usr/local/go')
+  set rtp+=/usr/local/go/misc/vim
+end
+
 set nocompatible
 " source $VIMRUNTIME/vimrc_example.vim
 " source $VIMRUNTIME/mswin.vim
@@ -10,7 +16,6 @@ source ~/.vim/cscopePath.vim
 " Chenyh's setting
 " for Linux
 
-syntax on    
 set number   
 " set cmdheight=2
 colo darkblue  
@@ -26,7 +31,9 @@ set expandtab
 set mouse=a
 
 set nocp
-filetype plugin on
+filetype off
+filetype plugin indent on
+syntax on    
 
 
 set isfname-==

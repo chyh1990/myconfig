@@ -9,6 +9,7 @@ function use_ccache(){
 alias pss='ps aux|grep -v grep|grep '
 export LS_COLORS="$LS_COLORS:di=00;36:"
 alias cscopeR="cscope -Rbkq"
+alias mountudisk="sudo mount -o rw,nosuid,nodev,uid=1000,gid=1000,dmask=0077,utf8=1,showexec "
 
 SSH_ENV=$HOME/.ssh/environment
 function start_agent {

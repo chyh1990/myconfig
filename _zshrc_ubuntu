@@ -39,5 +39,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 #export LC_CTYPE="UTF-8"
 #export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export GOROOT=/home/chenyh/prog/go
+export PATH=$GOROOT/bin:$PATH
 source ~/prog/myconfig/bashrc_ubuntu
 
