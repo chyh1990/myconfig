@@ -24,10 +24,12 @@ set smartindent
 set nocompatible 
 set autochdir
 set smarttab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+set noexpandtab                         " use tabs, not spaces
+set tabstop=8                           " tabstops of 8
+set shiftwidth=8                        " indents of 8
+set textwidth=78                        " screen in 80 columns wide, wrap at 78
+
+
 set mouse=a
 
 set nocp
