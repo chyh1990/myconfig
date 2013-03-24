@@ -32,14 +32,31 @@ ZSH_THEME="alanpeabody"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rails3 debian command-not-found)
+plugins=(git rvm ruby rails3 debian command-not-found)
 
-source $ZSH/oh-my-zsh.sh
+
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
 
 # Customize to your needs...
 #export LC_CTYPE="UTF-8"
 #export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export GOROOT=/home/chenyh/prog/go
 export PATH=$GOROOT/bin:$PATH
+export PATH=/opt/node-v0.8.20-linux-x64/bin:$PATH
+export PATH=$PATH:/home/chenyh/os/arm-eabi-4.6/bin/
+export PATH=$PATH:/home/chenyh/MATLAB/R2010b/bin/
+export PATH=$PATH:/home/chenyh/bin
+source /opt/intel/vtune_amplifier_xe_2011/amplxe-vars.sh > /dev/null
+source /opt/intel/composerxe-2011.2.137/bin/compilervars.sh intel64 &> /dev/null
+
+source $ZSH/oh-my-zsh.sh
+
+alias vim='nocorrect vim'
+
 source ~/prog/myconfig/bashrc_ubuntu
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

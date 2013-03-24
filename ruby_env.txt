@@ -1,4 +1,0 @@
-sudo gem install rdoc rdoc-data
-sudo rdoc-data --install
-sudo gem install ri_vim
-ri_vim_install
