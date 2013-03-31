@@ -58,5 +58,6 @@ alias vim='nocorrect vim'
 
 source ~/prog/myconfig/bashrc_ubuntu
 
+setopt no_share_history
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
