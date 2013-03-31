@@ -49,7 +49,7 @@ export PATH=/opt/node-v0.8.20-linux-x64/bin:$PATH
 export PATH=$PATH:/home/chenyh/os/arm-eabi-4.6/bin/
 export PATH=$PATH:/home/chenyh/MATLAB/R2010b/bin/
 export PATH=$PATH:/home/chenyh/bin
-source /opt/intel/vtune_amplifier_xe_2011/amplxe-vars.sh > /dev/null
+source /opt/intel/vtune_amplifier_xe_2011/amplxe-vars.sh &> /dev/null
 source /opt/intel/composerxe-2011.2.137/bin/compilervars.sh intel64 &> /dev/null
 
 source $ZSH/oh-my-zsh.sh
