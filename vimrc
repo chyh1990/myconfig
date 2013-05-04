@@ -47,7 +47,7 @@ set tags+=./tags,../tags,../../tags,../../../tags
 set tags+=$VIMRUNTIME/../vimfiles/tags/systags
 
 let Tlist_File_Fold_Auto_Close=1
-let Tlist_Ctags_Cmd='/Users/chenyh/prog/bin/bin/ctags'
+" let Tlist_Ctags_Cmd='/usr/bin/ctags'
 
 
 noremap <c-down> <c-w>j
@@ -55,7 +55,6 @@ noremap <c-up> <c-w>k
 noremap <c-left> <c-w>h
 noremap <c-right> <c-w>l
 
-noremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR>
 
 let OmniCpp_DefaultNamespaces = ["std"]
 let OmniCpp_GlobalScopeSearch = 1  " 0 or 1
@@ -105,3 +104,5 @@ let g:Tex_DefaultTargetFormat='pdf'
 nnoremap <C-P> :tabp<CR>
 nmap M :Man <cword><CR>
 
+nnoremap <silent> <F8> :TlistToggle<CR>
+noremap <C-T> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR>
