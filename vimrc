@@ -42,9 +42,9 @@ set isfname-==
 
 " set tags+=$VIMRUNTIME/../vimfiles/tags/sdltags
 " set tags+=$VIMRUNTIME/../vimfiles/tags/boosttags
-set tags+=$VIMRUNTIME/../vimfiles/tags/stltags
+set tags+=~/prog/myconfig/tags/stltags
 set tags+=./tags,../tags,../../tags,../../../tags
-set tags+=$VIMRUNTIME/../vimfiles/tags/systags
+" set tags+=$VIMRUNTIME/../vimfiles/tags/systags
 
 let Tlist_File_Fold_Auto_Close=1
 " let Tlist_Ctags_Cmd='/usr/bin/ctags'
