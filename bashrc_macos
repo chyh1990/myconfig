@@ -1,5 +1,6 @@
 alias pss='ps aux|grep -v grep|grep '
 alias cscopeR="cscope -Rbkq"
+alias ctagsR="ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes ."
 
 function use_gnubin
 {
