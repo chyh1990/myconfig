@@ -50,9 +50,9 @@ export PATH=/home/chenyh/android/android-ndk-r8e:$PATH
 export PATH=$PATH:/home/chenyh/os/arm-eabi-4.6/bin/
 export PATH=$PATH:/home/chenyh/MATLAB/R2010b/bin/
 export PATH=$PATH:/home/chenyh/bin
-export PATH=$PATH:/home/chenyh/android/android-sdk-linux/platform-tools
 source /opt/intel/vtune_amplifier_xe_2011/amplxe-vars.sh &> /dev/null
 source /opt/intel/composerxe-2011.2.137/bin/compilervars.sh intel64 &> /dev/null
+export PATH=$PATH:/home/user/android-sdk-linux/platform-tools:/opt/android-ndk-r8e/
 
 source $ZSH/oh-my-zsh.sh
 
