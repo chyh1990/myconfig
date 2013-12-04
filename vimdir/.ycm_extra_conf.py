@@ -19,6 +19,10 @@ flags = [
     'c++',
     '-I',
     '.',
+    '-I',
+    './include',
+    '-I',
+    '../include',
     '-isystem',
     '/usr/include/c++/4.6',
     '-isystem',
@@ -75,7 +79,8 @@ def FlagsForFile(filename):
                 compilation_info.compiler_working_dir_),
             filename)
     else:
-        relative_to = DirectoryOfThisScript()
+        #relative_to = DirectoryOfThisScript()
+        relative_to = os.getcwd()
         final_flags = MakeRelativePathsInFlagsAbsolute(flags, relative_to)
  
     return {
