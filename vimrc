@@ -28,9 +28,10 @@ set noexpandtab                         " use tabs, not spaces
 set tabstop=8                           " tabstops of 8
 set shiftwidth=8                        " indents of 8
 set textwidth=78                        " screen in 80 columns wide, wrap at 78
+set backspace=indent,eol,start
 
 
-set mouse=a
+" set mouse=a
 
 set nocp
 filetype off
@@ -56,7 +57,7 @@ noremap <c-left> <c-w>h
 noremap <c-right> <c-w>l
 
 
-let OmniCpp_DefaultNamespaces = ["std"]
+"let OmniCpp_DefaultNamespaces = ["std"]
 let OmniCpp_GlobalScopeSearch = 1  " 0 or 1
 let OmniCpp_NamespaceSearch = 1   " 0 ,  1 or 2
 let OmniCpp_DisplayMode = 0
@@ -106,3 +107,15 @@ nmap M :Man <cword><CR>
 
 nnoremap <silent> <F8> :TlistToggle<CR>
 noremap <C-T> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR>
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" " required! 
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+
+let g:ycm_global_ycm_extra_conf = "/home/user/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf=0
+"let g:ycm_global_ycm_extra_conf = "./.ycm_extra_conf.py"
