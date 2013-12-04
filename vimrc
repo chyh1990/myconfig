@@ -35,7 +35,6 @@ set backspace=indent,eol,start
 
 set nocp
 filetype off
-filetype plugin indent on
 syntax on    
 
 
@@ -108,6 +107,7 @@ nmap M :Man <cword><CR>
 nnoremap <silent> <F8> :TlistToggle<CR>
 noremap <C-T> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR>
 
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -115,7 +115,42 @@ call vundle#rc()
 " " required! 
 Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
 
+filetype plugin indent on
+
+" for YouCompleteMe
 let g:ycm_global_ycm_extra_conf = expand("~/.vim/.ycm_extra_conf.py")
 let g:ycm_confirm_extra_conf=0
+let g:ycm_complete_in_comments=1
+let g:ycm_collect_identifiers_from_comments_and_strings=1
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_seed_identifiers_with_syntax=1
+" suppress default value
+let g:ycm_filetype_blacklist = {'tagbar' : 1,'qf' : 1,'notes' : 1,'unite' : 1,'vimwiki' : 1,}
+
 "let g:ycm_global_ycm_extra_conf = "./.ycm_extra_conf.py"
+
+" not working
+function! g:UltiSnips_Complete()
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips_JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+"au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger = '<c-e>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsListSnippets = '<c-l>'
+
