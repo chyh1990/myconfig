@@ -63,6 +63,7 @@ puts ''
 
 `mkdir "#{title}"`
 dodl = true
+video_list = []
 segss.each {|_e|
 	k = _e[0]
 	v = _e[1]
@@ -75,10 +76,24 @@ segss.each {|_e|
 		puts flvurl
 		ext = k
 		ext = "mp4" if ext == 'hd2'
-		`wget -U "#{USERAGENT}" -O "#{title}/#{i}.#{ext}" "#{flvurl}"` if dodl
-		#`echo "file #{i}.#{ext}" >> "#{title}/list.txt"`
+		if dodl 
+			`wget -U "#{USERAGENT}" -O "#{title}/#{i}.#{ext}" "#{flvurl}"`
+			`echo "file #{i}.#{k}" >> "#{title}/list.txt"` 
+			video_list << "#{title}/#{i}.#{ext}" 
+		end
 	}
 	puts ''
 	dodl = false
 }
-
+first_input = ""
+video_list.each_with_index do |file, i|
+	if i + 1 == video_list.length
+		`mv \"#{first_input}\" \"#{title}/output.mp4\"`
+		break
+	end
+	first_input = file if first_input.length == 0
+	fn = "#{title}/tmp_#{i}.mp4"
+	`mencoder -oac mp3lame -ovc copy -idx -o \"#{fn}\" \"#{first_input}\" \"#{video_list[i + 1]}\"`
+	`rm #{first_input}` if i != 0
+	first_input = fn
+end
