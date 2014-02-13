@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+################################################
+#  Author: Yuheng Chen (chyh1990@gmail.com)    #
+#  Date:   2014/2                              #
+################################################
+
+
 require 'open-uri'
 require 'json'
 require 'pp'
@@ -67,7 +73,9 @@ segss.each {|_e|
 	v.sort{|x,y| x['no'] <=> y['no']}.each_with_index{|e,i|
 		flvurl = FLVPATH+"00_#{'%02d' % i}/st/flv/fileid/"+fid1[0..7]+('%02d' %i)+fid1[10..-1]+'?K='+e['k']
 		puts flvurl
-		`wget -U "#{USERAGENT}" -O "#{title}/#{i}.#{k}" "#{flvurl}"` if dodl
+		ext = k
+		ext = "mp4" if ext == 'hd2'
+		`wget -U "#{USERAGENT}" -O "#{title}/#{i}.#{ext}" "#{flvurl}"` if dodl
 		`echo "file #{i}.#{k}" >> "#{title}/list.txt"`
 	}
 	puts ''
