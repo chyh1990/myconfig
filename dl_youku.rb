@@ -15,6 +15,7 @@ options = {}
 option_parse = OptionParser.new do |opts|
 	opts.banner == "Here is the help message of this command line tool"
 	options[:merge] = false
+	options[:type] = "flv"
 	opts.on('-m', '--merge', 'Merge all the video clips') do 
 		options[:merge] = true
 	end
