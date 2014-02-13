@@ -9,6 +9,19 @@
 require 'open-uri'
 require 'json'
 require 'pp'
+require 'optparse'
+
+options = {}
+option_parse = OptionParser.new do |opts|
+	opts.banner == "Here is the help message of this command line tool"
+	options[:merge] = false
+	opts.on('-m', '--merge', 'Merge all the video clips') do 
+		options[:merge] = true
+	end
+	opts.on('-t TYPE', '--type TYPE', 'Choose the downloaded (hd2,mp4,flv)') do |val|
+		options[:type] = val
+	end
+end.parse!
 
 def getFileIDMixString(seed)
 	src = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/\:._-1234567890'
@@ -67,7 +80,7 @@ video_list = []
 segss.each {|_e|
 	k = _e[0]
 	v = _e[1]
-	puts k
+	next if k != options[:type]
 	sfid = info['data'].first['streamfileids'][k]
 	fid1=getFileID(sfid, seed)
 	`: > "#{title}/list.txt"`
@@ -86,14 +99,16 @@ segss.each {|_e|
 	dodl = false
 }
 first_input = ""
-video_list.each_with_index do |file, i|
-	if i + 1 == video_list.length
-		`mv \"#{first_input}\" \"#{title}/output.mp4\"`
-		break
+if  options[:merge]
+	video_list.each_with_index do |file, i|
+		if i + 1 == video_list.length
+			`mv \"#{first_input}\" \"#{title}/output.mp4\"`
+			break
+		end
+		first_input = file if first_input.length == 0
+		fn = "#{title}/tmp_#{i}.mp4"
+		`mencoder -oac mp3lame -ovc copy -idx -o \"#{fn}\" \"#{first_input}\" \"#{video_list[i + 1]}\"`
+		`rm #{first_input}` if i != 0
+		first_input = fn
 	end
-	first_input = file if first_input.length == 0
-	fn = "#{title}/tmp_#{i}.mp4"
-	`mencoder -oac mp3lame -ovc copy -idx -o \"#{fn}\" \"#{first_input}\" \"#{video_list[i + 1]}\"`
-	`rm #{first_input}` if i != 0
-	first_input = fn
 end
