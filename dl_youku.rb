@@ -76,7 +76,7 @@ segss.each {|_e|
 		ext = k
 		ext = "mp4" if ext == 'hd2'
 		`wget -U "#{USERAGENT}" -O "#{title}/#{i}.#{ext}" "#{flvurl}"` if dodl
-		`echo "file #{i}.#{k}" >> "#{title}/list.txt"`
+		#`echo "file #{i}.#{ext}" >> "#{title}/list.txt"`
 	}
 	puts ''
 	dodl = false
