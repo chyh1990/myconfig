@@ -129,6 +129,11 @@ let g:ycm_seed_identifiers_with_syntax=1
 " suppress default value
 let g:ycm_filetype_blacklist = {'tagbar' : 1,'qf' : 1,'notes' : 1,'unite' : 1,'vimwiki' : 1,}
 
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-K> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 "let g:ycm_global_ycm_extra_conf = "./.ycm_extra_conf.py"
 
 " not working

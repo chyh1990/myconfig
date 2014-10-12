@@ -63,3 +63,5 @@ source ~/prog/myconfig/bashrc_ubuntu
 setopt no_share_history
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+ [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
+#sleep 1
