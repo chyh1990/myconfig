@@ -1,0 +1,33 @@
+[general]
+# List of accounts to be synced, separated by a comma.
+accounts = main
+pythonfile = ~/.offlineimap.py
+
+[Account main]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = main-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually
+# non-local.
+remoterepository = main-remote
+# Status cache. Default is plain, which eventually becomes huge and slow.
+status_backend = sqlite
+
+[Repository main-local]
+# Currently, offlineimap only supports maildir and IMAP for local
+# repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = ~/Maildir
+
+[Repository main-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = IMAP
+remotehost = imap.exmail.qq.com
+remoteuser = yuhengchen@sensetime.com
+#remoteuserval = "yuhengchen@sensetime.com"
+remotepasseval = get_password("offlineimap", "yuhengchen")
+maxconnections = 4
+ssl = yes
+#sslcacertfile = /opt/local/share/curl/curl-ca-bundle.crt 
+sslcacertfile = ~/prog/myconfig/mail/curl-ca-bundle.crt
+realdelete = no

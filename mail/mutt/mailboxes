@@ -1,0 +1,6 @@
+#mailboxes =Inbox
+#mailboxes !
+mailboxes "+INBOX"
+mailboxes "+Junk"
+mailboxes "+Drafts"
+mailboxes "+Sent Messages"
