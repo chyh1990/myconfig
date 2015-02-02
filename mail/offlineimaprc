@@ -29,5 +29,5 @@ remotepasseval = get_password("offlineimap", "yuhengchen")
 maxconnections = 4
 ssl = yes
 #sslcacertfile = /opt/local/share/curl/curl-ca-bundle.crt 
-sslcacertfile = ~/prog/myconfig/mail/curl-ca-bundle.crt
+sslcacertfile = ~/.mutt/curl-ca-bundle.crt
 realdelete = no
