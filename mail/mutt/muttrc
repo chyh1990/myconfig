@@ -39,6 +39,13 @@ set envelope_from			  # set the envelope-from information
 set reverse_name=yes			  # build From: in the reply based on the To: address (must have
 					  # a working 'alternates' line above
 #set alias_file=~/.mutt/aliases            # Keep aliases in this file.
+#source ~/.mutt/aliases			  # Load in my aliases.
+
+set charset="utf-8"
+set query_command= "abook --mutt-query '%s'"
+#macro index,pager A "<pipe-message>abook --add-email-quiet<return>"  "add the sender address to abook"
+macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode; set pipe_decode<return><pipe-message>abook --add-email-quiet<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
+
 set nomove                                # Hold messages in $MAIL.
 set print=ask-yes                         # Ask before printing.
 set delete=ask-yes                        # Ask before doing a delete.
@@ -89,7 +96,6 @@ set to_chars=" +TCF "                     # Drop the "L".
 
 #source ~/.mutt/gpg.rc			  # Use GPG
 source ~/.mutt/auto_views		  # Define auto_views.
-#source ~/.mutt/aliases			  # Load in my aliases.
 #source ~/.mutt/subscriptions		  # Define the list of subscribed mailing lists.
 source ~/.mutt/mailboxes		  # Define the list of folders that receive mail.
 #source ~/.mutt/headers			  # Configure header display.

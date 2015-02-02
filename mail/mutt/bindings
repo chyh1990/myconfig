@@ -18,8 +18,8 @@ bind pager h previous-entry
 bind pager l next-entry
 
 # a bit more like slrn...
-bind index X exit
-bind pager X exit
+#bind index X exit
+#bind pager X exit
 bind index x sync-mailbox
 bind pager x sync-mailbox
 
@@ -34,6 +34,7 @@ bind pager \eD delete-thread
 bind pager \eU undelete-thread
 bind pager <Home> top
 bind pager <End> bottom
+bind pager g top
 bind pager G bottom
 bind pager q exit
 bind pager B bounce-message
@@ -44,8 +45,11 @@ bind pager <Delete> next-entry
 bind index \eD delete-thread
 bind index \eU undelete-thread
 #bind index B bounce-message
-bind index B previous-page
-bind index b next-page
+bind index \CU previous-page
+bind index \CD next-page
+bind pager \CU previous-page
+bind pager \CD next-page
+
 bind index <Home> first-entry
 bind index <End> last-entry
 bind index G last-entry
