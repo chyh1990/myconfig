@@ -12,6 +12,9 @@ remoterepository = main-remote
 # Status cache. Default is plain, which eventually becomes huge and slow.
 status_backend = sqlite
 
+# 20M, not supported
+# maxsize = 20000000
+
 [Repository main-local]
 # Currently, offlineimap only supports maildir and IMAP for local
 # repositories.

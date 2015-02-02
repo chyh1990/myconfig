@@ -10,9 +10,12 @@ bind index <Down> next-entry
 bind pager <Down> next-line
 
 bind index j next-entry
-#bind pager j next-line
+bind pager j next-line
 bind index k previous-entry
-#bind pager k previous-line
+bind pager k previous-line
+
+bind pager h previous-entry
+bind pager l next-entry
 
 # a bit more like slrn...
 bind index X exit
@@ -40,8 +43,9 @@ bind pager <Delete> next-entry
 #bind index i fetch-mail
 bind index \eD delete-thread
 bind index \eU undelete-thread
-bind index B bounce-message
-bind index b previous-page
+#bind index B bounce-message
+bind index B previous-page
+bind index b next-page
 bind index <Home> first-entry
 bind index <End> last-entry
 bind index G last-entry
