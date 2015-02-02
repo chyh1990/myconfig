@@ -34,7 +34,7 @@ bind pager \eD delete-thread
 bind pager \eU undelete-thread
 bind pager <Home> top
 bind pager <End> bottom
-bind pager g top
+bind pager 1g top
 bind pager G bottom
 bind pager q exit
 bind pager B bounce-message
@@ -62,3 +62,6 @@ bind pager b previous-page
 bind pager - noop
 bind pager <Space> next-page
 bind alias <Tab> next-entry
+
+# macros
+macro index R "<shell-escape>offlineimap\r"

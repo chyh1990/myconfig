@@ -51,7 +51,7 @@ set print=ask-yes                         # Ask before printing.
 set delete=ask-yes                        # Ask before doing a delete.
 set include                               # Include the message in replies.
 set sort=threads			  # always sort by thread
-set sort_aux=reverse-date-received                # Sort threads by date received.
+set sort_aux=reverse-last-date-received                # Sort threads by date received.
 #set charset=iso-8859-1                    # One of those days in England...
 #set noallow_8bit                          # 8bit isn't safe via Demon.
 #set ascii_chars=yes			  # use ascii characters when displaying trees
@@ -72,7 +72,10 @@ set nomark_old                            # Don't mark unread new msgs as old.
 set nobeep                                # We don't need no beeping software.
 set nosmart_wrap                          # Don't want smart wrapping.
 set nomarkers                             # Don't want any wrap markers.
-set mime_forward                          # Forward message as MIME attachments.
+set mime_forward=yes                          # Forward message as MIME attachments.
+set mime_forward_rest=yes                          # Forward message as MIME attachments.
+set mime_forward_decode=yes
+set rfc2047_parameters
 set pager_context=3                       # Display 3 lines of context in pager.
 set nostrict_threads                      # Lets have some fuzzy threading.
 set sendmail_wait=-1                      # Don't wait around for sendmail.

@@ -3,7 +3,7 @@
 <plist version="1.0">
 	<dict>
 		<key>Label</key>
-		<string>cc.yuhengchen.offlineimap.plist</string>
+		<string>cc.yuhengchen.offlineimap</string>
 		<key>ProgramArguments</key>
 		<array>
 			<string>/opt/local/bin/offlineimap</string>
@@ -11,6 +11,6 @@
 			<string>quiet</string>
 		</array>
 		<key>StartInterval</key>
-		<integer>120</integer>
+		<integer>240</integer>
 	</dict>
 </plist>

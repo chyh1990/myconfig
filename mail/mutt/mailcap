@@ -67,7 +67,10 @@ application/pdf; ~/.mutt/view_attachment.sh %s pdf
 
 # HTML
 # -- always use lynx; it's gay to use safari for this
-text/html; elinks -force-html %s
+# elinks -force-html %s
+#text/html; ~/.mutt/view_attachment.sh %s html
+text/html; w3m -I %{charset} -O utf-8  -T text/html; copiousoutput;
+alternative_order text/enriched text/plain text text/html
 
 # Unidentified.
 application/octet-stream; ~/.mutt/view_attachment.sh %s "-" 

@@ -57,7 +57,7 @@
 #
 
 # the tmp directory to use.
-tmpdir="$HOME/tmp/mutt_attach"
+tmpdir="/tmp/mutt_attach/$(whoami)"
 
 # the name of the debug file if debugging is turned on.
 debug_file=$tmpdir/debug
@@ -92,23 +92,23 @@ fi
 
 # if the type is empty then try to figure it out.
 if [ -z $type ]; then
-    type=`file -bi $1 | cut -d"/" -f2`
+    type=`file -b $1 | cut -d" " -f1`
 fi
 
 # if the type is '-' then we don't want to mess with type.
 # Otherwise we are rebuilding the name.  Either from the
 # type that was passed in or from the type we discerned.
-if [ $type = "-" ]; then
+if [ "$type" = "-" ]; then
     newfile=$filename
 else
-    newfile=$file.$type
+    newfile="$file.$type"
 fi
 
 newfile=$tmpdir/$newfile
 
 # Copy the file to our new spot so mutt can't delete it
 # before the app has a chance to view it.
-cp $1 $newfile
+cp $1 "$newfile"
 
 if [ $debug = "yes" ]; then
     echo "File:" $file "TYPE:" $type >> $debug_file
@@ -120,7 +120,7 @@ fi
 # Otherwise we've been told what to use.  So do an open -a.
 
 if [ -z $open_with ]; then
-    open $newfile
+    open "$newfile"
 else
-    open -a "$open_with" $newfile
+    open -a "$open_with" "$newfile"
 fi

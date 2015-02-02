@@ -2,6 +2,7 @@
 # List of accounts to be synced, separated by a comma.
 accounts = main
 pythonfile = ~/.offlineimap.py
+socktimeout = 30
 
 [Account main]
 # Identifier for the local repository; e.g. the maildir to be synced via IMAP.
