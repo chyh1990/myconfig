@@ -2,13 +2,14 @@
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 OFFLINEIMAP=/opt/local/bin/offlineimap
-INTERVAL=240
+# full check every 5 minutes
+INTERVAL=300
 
 #trap "echo Mail daemon exting...;exit" SIGINT
 
 last_full=$(date +%s)
 while true; do
-	$DIR/checkmail.py $OFFLINEIMAP $(( $INTERVAL + 2 ))
+	$DIR/checkmail.py $OFFLINEIMAP $(( $INTERVAL / 3 ))
 	curr_time=$(date +%s)
 	diff=$(($curr_time - $last_full))
 	#echo $diff
