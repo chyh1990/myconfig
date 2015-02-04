@@ -12,6 +12,7 @@ localrepository = main-local
 remoterepository = main-remote
 # Status cache. Default is plain, which eventually becomes huge and slow.
 status_backend = sqlite
+postsynchook = notmuch new
 
 # 20M, not supported
 # maxsize = 20000000

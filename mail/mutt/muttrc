@@ -46,6 +46,11 @@ set query_command= "abook --mutt-query '%s'"
 #macro index,pager A "<pipe-message>abook --add-email-quiet<return>"  "add the sender address to abook"
 macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode; set pipe_decode<return><pipe-message>abook --add-email-quiet<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
 
+# 'L' performs a notmuch query, showing only the results
+macro index L "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.mutt/.mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.mutt/.mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+# 'a' shows all messages again (supersedes default <alias> binding)
+macro index a "<limit>all\n" "show all messages (undo limit)"
+
 set nomove                                # Hold messages in $MAIL.
 set print=ask-yes                         # Ask before printing.
 set delete=ask-yes                        # Ask before doing a delete.
