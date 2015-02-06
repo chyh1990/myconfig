@@ -1,15 +1,21 @@
 #!/bin/bash
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-OFFLINEIMAP=/opt/local/bin/offlineimap
 # full check every 5 minutes
 INTERVAL=300
 
+if [[ `uname` -eq "Darwin" ]]; then
+	PYTHON=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python
+	OFFLINEIMAP=/opt/local/bin/offlineimap
+else
+	PYTHON=python
+	OFFLINEIMAP=offlineimap
+fi
 #trap "echo Mail daemon exting...;exit" SIGINT
 
 last_full=$(date +%s)
 while true; do
-	$DIR/checkmail.py $OFFLINEIMAP $(( $INTERVAL / 3 ))
+	$PYTHON $DIR/checkmail.py $OFFLINEIMAP $(( $INTERVAL / 3 ))
 	curr_time=$(date +%s)
 	diff=$(($curr_time - $last_full))
 	#echo $diff
