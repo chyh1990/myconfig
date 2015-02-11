@@ -28,8 +28,12 @@ class mysock():
         return self.M.socket().fileno()
 
 def show_notification():
-    cmd = 'osascript -e \'display notification "You have a new mail" with title \
-    "Mutt"\''
+    if sys.platform == 'darwin':
+        cmd = 'osascript -e \'display notification "You have a new mail" with title \
+                "Mutt"\''
+    else:
+        cmd = 'notify-send -t 3000 "You have a new mail"'
+
     os.system(cmd)
 
 if __name__ == '__main__':

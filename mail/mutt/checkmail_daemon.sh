@@ -1,10 +1,19 @@
 #!/bin/bash
 
+PIDFILE=~/.mutt/checkmail.pid
+oldpid=`cat $PIDFILE 2>/dev/null`
+if [[ ! -z $oldpid && ! $(ps -p $oldpid | grep checkmail ) == "" ]]; then
+	echo "Already running..."
+	exit 1
+fi
+
+echo $$ > $PIDFILE
+
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # full check every 5 minutes
 INTERVAL=300
 
-if [[ `uname` -eq "Darwin" ]]; then
+if [[ `uname` == "Darwin" ]]; then
 	PYTHON=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python
 	OFFLINEIMAP=/opt/local/bin/offlineimap
 else
