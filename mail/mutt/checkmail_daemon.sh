@@ -4,7 +4,9 @@ PIDFILE=~/.mutt/checkmail.pid
 oldpid=`cat $PIDFILE 2>/dev/null`
 if [[ ! -z $oldpid && ! $(ps -p $oldpid | grep checkmail ) == "" ]]; then
 	echo "Already running..."
-	exit 1
+	kill $oldpid
+	sleep 1
+	#exit 1
 fi
 
 echo $$ > $PIDFILE
@@ -20,7 +22,8 @@ else
 	PYTHON=python
 	OFFLINEIMAP=offlineimap
 fi
-#trap "echo Mail daemon exting...;exit" SIGINT
+#trap "echo Mail daemon exting...;exit" SIGINT SIGTERM
+trap "kill 0;exit" SIGINT SIGTERM SIGHUP EXIT
 
 last_full=$(date +%s)
 while true; do

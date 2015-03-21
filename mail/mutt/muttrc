@@ -102,6 +102,14 @@ set mailcap_path="~/.mutt/mailcap"
 set quote_regexp="^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set to_chars=" +TCF "                     # Drop the "L".
 
+color body green default "^diff \-.*"
+color body green default "^index [a-f0-9].*"
+color body green default "^\-\-\- .*"
+color body green default "^[\+]{3} .*"
+color body cyan default "^[\+][^\+]+.*"
+color body red  default "^\-[^\-]+.*"
+color body brightblue default "^@@ .*"
+
 #source ~/.mutt/gpg.rc			  # Use GPG
 source ~/.mutt/auto_views		  # Define auto_views.
 #source ~/.mutt/subscriptions		  # Define the list of subscribed mailing lists.
