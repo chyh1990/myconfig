@@ -37,7 +37,7 @@ if !exists("*Cpplint()")
 
         " perform the grep itself
         let &grepformat="%f:%l: %m"
-        let &grepprg=s:cpplint_cmd
+        let &grepprg=s:cpplint_cmd . " --filter=-build/include_order,-build/namespaces,-legal/copyright"
         silent! grep! %
 
         " restore grep settings
