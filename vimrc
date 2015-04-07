@@ -109,14 +109,16 @@ noremap <C-T> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " " required! 
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'SirVer/ultisnips'
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
+call vundle#end()            " required
 filetype plugin indent on
 
 " for YouCompleteMe
