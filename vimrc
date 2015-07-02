@@ -30,6 +30,7 @@ set shiftwidth=8                        " indents of 8
 set textwidth=78                        " screen in 80 columns wide, wrap at 78
 set backspace=indent,eol,start
 
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 expandtab
 
 " set mouse=a
 
@@ -117,6 +118,9 @@ Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'rust-lang/rust.vim'
+Bundle 'vim-ruby/vim-ruby'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -161,3 +165,8 @@ let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets = '<c-l>'
 
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
