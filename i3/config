@@ -32,6 +32,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # tools
 bindsym $mod+c exec google-chrome
 bindsym $mod+n exec nautilus --no-desktop
+bindsym $mod+Shift+z exec i3lock -c 202020
 
 # kill focused window
 bindsym $mod+Shift+q kill

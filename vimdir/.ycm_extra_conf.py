@@ -28,7 +28,11 @@ flags = [
     '-isystem',
     '/usr/include/c++/4.6',
     '-isystem',
-    '/usr/include/c++/4.6/x86_64-linux-gnu/'
+    '/usr/include/c++/4.6/x86_64-linux-gnu/',
+    '-isystem',
+    '/usr/include/c++/4.8',
+    '-isystem',
+    '/usr/include/x86_64-linux-gnu/c++/4.8/'
     ]
 
 if compilation_database_folder:

@@ -1,27 +1,41 @@
-if !empty($GOROOT)
-  set rtp+=$GOROOT/misc/vim
-elseif isdirectory('/usr/local/go')
-  set rtp+=/usr/local/go/misc/vim
-end
-
 set nocompatible
 " source $VIMRUNTIME/vimrc_example.vim
 " source $VIMRUNTIME/mswin.vim
 " behave mswin
-source $VIMRUNTIME/ftplugin/man.vim
-source ~/.vim/cscope_maps.vim
-source ~/.vim/cscopePath.vim
+" source $VIMRUNTIME/ftplugin/man.vim
+
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+" let Vundle manage Vundle
+" " required!
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'junegunn/vim-easy-align'
+Bundle 'vim-ruby/vim-ruby'
+Plugin 'rust-lang/rust.vim'
+Bundle 'ntpeters/vim-better-whitespace'
+Bundle 'cespare/vim-toml'
+Bundle 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'rhysd/vim-crystal'
+
+call vundle#end()            " required
+filetype plugin indent on
 
 
 " Chenyh's setting
 " for Linux
 
-set number   
+set number
 " set cmdheight=2
-colo darkblue  
+colo darkblue
 set autoindent
 set smartindent
-set nocompatible 
+set nocompatible
 set autochdir
 set smarttab
 set noexpandtab                         " use tabs, not spaces
@@ -30,25 +44,16 @@ set shiftwidth=8                        " indents of 8
 set textwidth=78                        " screen in 80 columns wide, wrap at 78
 set backspace=indent,eol,start
 
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype crystal setlocal ts=2 sts=2 sw=2 expandtab
 
 " set mouse=a
 
 set nocp
 filetype off
-syntax on    
-
+syntax on
 
 set isfname-==
-
-" set tags+=$VIMRUNTIME/../vimfiles/tags/sdltags
-" set tags+=$VIMRUNTIME/../vimfiles/tags/boosttags
-set tags+=~/prog/myconfig/tags/stltags
-set tags+=./tags,../tags,../../tags,../../../tags
-" set tags+=$VIMRUNTIME/../vimfiles/tags/systags
-
-let Tlist_File_Fold_Auto_Close=1
-" let Tlist_Ctags_Cmd='/usr/bin/ctags'
-
 
 noremap <c-down> <c-w>j
 noremap <c-up> <c-w>k
@@ -86,13 +91,13 @@ nnoremap <C-N> :tabnew<space>
 
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 let g:winManagerWidth = 30
- 
+
 nmap <silent> <F3> :WMToggle<cr>
 let g:AutoOpenWinManager = 1
 
-if has("win32") 
-set guifont=Consolas:h11 
-endif 
+if has("win32")
+set guifont=Consolas:h11
+endif
 
 " autocmd FileType python set omnifunc=pythoncomplete#Complete
 
@@ -107,19 +112,14 @@ nmap M :Man <cword><CR>
 nnoremap <silent> <F8> :TlistToggle<CR>
 noremap <C-T> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --if0=yes . <CR>
 
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+if &t_Co == 256
+	let g:solarized_termcolors=256
+	set background=dark
+	colorscheme solarized
+endif
 
-" let Vundle manage Vundle
-" " required! 
-Plugin 'gmarik/vundle'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-
-call vundle#end()            " required
-filetype plugin indent on
+" always show statusline
+set laststatus=2
 
 " for YouCompleteMe
 let g:ycm_global_ycm_extra_conf = expand("~/.vim/.ycm_extra_conf.py")
@@ -160,4 +160,16 @@ let g:UltiSnipsExpandTrigger = '<c-e>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets = '<c-l>'
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+let $RUST_SRC_PATH="/home/chenyh/prog/rustc-1.0.0-beta.2/src/"
+let g:racer_cmd = "/home/chenyh/prog/racer/target/release/racer"
+autocmd FileType rust let g:ycm_semantic_triggers = {
+			\  'rust'  : ['::', '.'],
+			\ }
 
