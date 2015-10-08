@@ -22,6 +22,9 @@ Bundle 'cespare/vim-toml'
 Bundle 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'rhysd/vim-crystal'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'valloric/MatchTagAlways'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -46,6 +49,7 @@ set backspace=indent,eol,start
 
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype crystal setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype haskell setlocal ts=8 sts=4 sw=4 expandtab shiftround
 
 " set mouse=a
 
@@ -120,6 +124,7 @@ endif
 
 " always show statusline
 set laststatus=2
+let g:airline_powerline_fonts = 1
 
 " for YouCompleteMe
 let g:ycm_global_ycm_extra_conf = expand("~/.vim/.ycm_extra_conf.py")
