@@ -25,6 +25,8 @@ Plugin 'rhysd/vim-crystal'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'valloric/MatchTagAlways'
+Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-sleuth'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -48,6 +50,8 @@ set textwidth=78                        " screen in 80 columns wide, wrap at 78
 set backspace=indent,eol,start
 
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype php setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype crystal setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype haskell setlocal ts=8 sts=4 sw=4 expandtab shiftround
 
